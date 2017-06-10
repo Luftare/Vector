@@ -123,19 +123,64 @@ class Vector {
   }
   
   distance(v) {
-    return Math.sqrt((this.x - v.x) ** 2 + (this.y - v.y) ** 2);
+    return Math.sqrt(this.distanceSq(v));
+  }
+  
+  distanceSq(v) {
+    return (this.x - v.x) ** 2 + (this.y - v.y) ** 2;
   }
   
   withinRange(v,r) {
-    return (this.x - v.x) ** 2 + (this.y - v.y) ** 2 < r ** 2;
+    return this.distanceSq(v) < r ** 2;
   }
   
   outsideRange(v,r) {
-    return (this.x - v.x) ** 2 + (this.y - v.y) ** 2 > r ** 2;
+    return this.distanceSq(v) > r ** 2;
+  }
+  
+  //credits: https://stackoverflow.com/a/6853926
+  segmentDistanceSq(end, point) {
+    let x1 = this.x;
+    let y1 = this.y;
+    let x2 = end.x;
+    let y2 = end.y;
+    let x = point.x;
+    let y = point.y;
+
+    let xx, yy;
+    let A = x - x1;
+    let B = y - y1;
+    let C = x2 - x1;
+    let D = y2 - y1;
+
+    let dot = A * C + B * D;
+    let len_sq = C * C + D * D;
+    let param = -1;
+    if (len_sq !== 0) param = dot / len_sq;
+        
+    if (param < 0) {
+      xx = x1;
+      yy = y1;
+    } else if (param > 1) {
+      xx = x2;
+      yy = y2;
+    } else {
+      xx = x1 + param * C;
+      yy = y1 + param * D;
+    }
+
+    let dx = x - xx;
+    let dy = y - yy;
+    
+    return dx ** 2 + dy ** 2;
+  }
+  
+  segmentDistance(end, point) {
+    return Math.sqrt(this.segmentDistanceSq(end, point));
   }
   
   isShorter(l) {
-    return this.x ** 2 + this.y ** 2 < l ** 2;
+    return this.distanceSq(v) < l ** 2;
   }
   
   isLonger(l) {
