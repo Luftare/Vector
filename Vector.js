@@ -14,7 +14,7 @@ class Vector {
 
   //getters
   get angle() {
-    return Math.atan(this.y / this.x);
+    return (this.x < 0? Math.PI : 0) + Math.atan(this.y / this.x);
   }
 
   get length() {
@@ -38,7 +38,7 @@ class Vector {
   }
 
   set length(l) {
-    if(this.length === 0) return 0;
+    if(this.length === 0) return this.set(l, 0);
     this.normalize().scale(l);
   }
 
@@ -53,6 +53,10 @@ class Vector {
     this.x = o.x;
     this.y = o.y;
     return this;
+  }
+
+  fromAngleRadius(angle, radius) {
+    return this.set(radius, 0).toAngle(angle);
   }
 
   toArray() {
@@ -106,7 +110,7 @@ class Vector {
     return this.set(a.x - b.x, a.y - b.y);
   }
 
-  addScaled(a, ...args) {
+  scaledAdd(a, ...args) {
     args.forEach(v => {
       this.x += v.x * a;
       this.y += v.y * a;
@@ -207,8 +211,13 @@ class Vector {
     return this.x === v.x && this.y && v.y;
   }
 
+  isAligned(v, tolerance = 0) {
+    const dif = Math.abs(this.angle - v.angle);
+    return dif <= tolerance;
+  }
+
   crossSign(v) {
-    if(this.equals(v)) return 0;
+    if(this.isEqual(v)) return 0;
     const c = this.cross(v);
     return c >= 0? 1 : -1;
   }
@@ -225,6 +234,8 @@ class Vector {
   }
 
   stretch(l) {
+	let len = this.length;
+	if(len === 0 && l > 0) return this.set(l, 0);
     this.length = Math.max(0, this.length + l);
     return this;
   }
