@@ -82,6 +82,10 @@ class Vector {
     return this;
   }
 
+  setFromTo(from, to) {
+    return this.set(to).substract(from);
+  }
+
   add(...args) {
     args.forEach(v => {
       this.x += v.x;
