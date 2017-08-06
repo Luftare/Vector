@@ -297,3 +297,25 @@ let vec = new Vector(10, 0);
 vec.limit(5);
 console.log(vec);//{x: 5, y: 0}
 ```
+### unlimit
+Stretches the length of the vector if its' length is less than given length. Arguments: `unlimit(number)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(10, 0);
+vec.unlimit(15);
+console.log(vec);//{x: 15, y: 0}
+```
+### clampLength
+Clamps the length of the vector to be between two given values. Arguments can be provided at any order. Arguments: `clampLength(limit1 [, limitn])`. Returns self so can be chained.
+```javascript
+let vec = new Vector(1, 0);
+vec.clampLength(5, 10);
+console.log(vec);//{x: 5, y: 0}
+```
+### clampAngle
+Clamps the angle of the vector to be between within given angle to another vector. If the vector is outside of the allowed range, closest allowed angle is set. Arguments: `clampAngle(angle, vector)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(1, 0);
+let another = new Vector(30, 100);
+vec.clampAngle(Math.PI / 10, another);
+console.log(vec);//{x: 5, y: 0}
+```
