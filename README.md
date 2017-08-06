@@ -317,5 +317,64 @@ Clamps the angle of the vector to be between within given angle to another vecto
 let vec = new Vector(1, 0);
 let another = new Vector(30, 100);
 vec.clampAngle(Math.PI / 10, another);
-console.log(vec);//{x: 5, y: 0}
+console.log(vec);//{x: 0.5692686788038682, y: 0.822151550100648}
+```
+### angleBetween
+Returns the angle between self and another vector as absolute value. Arguments: `angleBetween(vector)`.
+```javascript
+let vec = new Vector(-1, 0);
+let another = new Vector(1, 1);
+vec.angleBetween(another);//2.356194490192345
+```
+### angleBetweenSigned
+Returns the angle between self and another vector where sign of the angle tells which direction the another vector is angled from self. Arguments: `angleBetweenSigned(vector)`.
+```javascript
+let vec = new Vector(-1, 0);
+let another = new Vector(1, 1);
+vec.angleBetweenSigned(another);//-2.356194490192345
+```
+### mirror
+Rotates the vector by 180 degrees or PI radians. Returns self so can be chained.
+```javascript
+let vec = new Vector(-14, 50);
+vec.mirror();//{x: 14, y: -50}
+```
+### zero
+Sets the x & y values to 0. Returns self so can be chained.
+```javascript
+let vec = new Vector(-14, 50);
+vec.zero();//{x: 0, y: 0}
+```
+### toNormal
+Rotates self by 90 degrees or PI / 2 radians. Returns self so can be chained. Optional argument can be provided to get mirrored normal. Arguments: `toNormal(boolean)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(1, 0);
+vec.toNormal();//{x: 0, y: 1}
+```
+### normalTo
+Sets self to the normal of another vector. Optional argument can be provided to get mirrored normal. Arguments: `toNormal(boolean)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(100, 0);
+let another = new Vector(20, 50);
+vec.normalTo(another);//{x: 92.84766908852593, y: 37.13906763541038}
+```
+### rotate
+Rotate vector by given radians. Arguments: `rotate(radians)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(100, 0);
+vec.rotate(- Math.PI / 2);//{x: 0, y: -100}
+```
+### lerpAlign
+Rotate the vector towards aligning it with another vector by given radians if the vectors aren't aligned. Rotates towards the direction with smallest angle difference (ie. doesn't take rotation direction of over PI angle). Arguments: `lerpAlign(radians, vector)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(100, 0);
+let another = new Vector(0, 100);
+vec.lerpAlign(Math.PI / 10, another);//{x: 95.10565162951536, y: 30.901699437494745}
+```
+### lerpAlignFixed
+Rotate the vector towards aligning it with another vector by given radians if the vectors aren't aligned. Rotation direction is depending on the clockwise/anticlockwise argument. Arguments: `lerpAlignFixed(radians, clockwise, vector)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(100, 0);
+let another = new Vector(0, 100);
+vec.lerpAlignFixed(Math.PI / 10, false, another);//{x: 95.10565162951536, y: -30.901699437494745}
 ```
