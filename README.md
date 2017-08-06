@@ -128,4 +128,172 @@ let vec = new Vector();
 vec.setFromTo(from, to);
 console.log(vec.x, vec.y);//--> 50, 250
 ```
-
+### random
+Randoms vector direction. Length of the randomed vector can be passed as the only, optional, argument. Returns self so can be chained.
+```javascript
+let vec = new Vector();
+vec.random();
+console.log(vec);//possibly: {x: -0.23372631348780365, y: 0.9723024274285244}
+```
+### substract
+Substract one or more vectors.  Arguments: `add(vector1 [, vectorn])`. Returns self so can be chained.
+```javascript
+let vec = new Vector(50, 50);
+let another = new Vector(10, 5);
+vec.substract(another);
+console.log(vec);//--> {x: 40, y: 45}
+```
+### substraction
+Sets vector value to the substraction of two vectors.  Arguments: `add(vector1 , vector2)`. Returns self so can be chained.
+```javascript
+let vec = new Vector();
+let other = new Vector(100, 100);
+let another = new Vector(5, 5);
+vec.substraction(another, other);
+console.log(vec);//--> {x: -95, y: 95}
+```
+### scaledAdd
+Add one or more vectors by first scaling the to-be-added vectors with given number. Arguments: `scaledAdd(scale, vector1 [, vectorn])`. Returns self so can be chained.
+```javascript
+let vec = new Vector(10, 10);
+let other = new Vector(100, 100);
+let scale = 0.1;
+vec.scaledAdd(scale, other);
+console.log(vec);//--> {x: 20, y: 20}
+```
+### scale
+Multiply x & y values by given number. Returns self so can be chained.
+```javascript
+let vec = new Vector(10, 10);
+vec.scale(10);
+console.log(vec);//--> {x: 100, y: 100}
+```
+### toAngle
+Rotate the vector to point to given angle. Returns self so can be chained.
+```javascript
+let vec = new Vector(0, 100);
+vec.toAngle(Math.PI);
+console.log(vec);//--> {x: -100, y: 0}
+```
+### alignWith
+Align the vector to point towards the same direction as the vector provided. Returns self so can be chained.
+```javascript
+let vec = new Vector(200, 100);
+let another = new Vector(10, 0);
+vec.alignWith(another);
+console.log(vec);//--> {x: 223.60679774997897, y: 0}
+```
+### distance
+Returns the distance between the vector and another vector.
+```javascript
+let vec = new Vector(200, 100);
+let another = new Vector(10, 0);
+vec.distance(another);
+console.log(vec);//--> 214.7091055358389
+```
+### distanceSq
+Returns the distance between the vector and another vector in power of two. More performant than the `distance` method when comparing two distances.
+```javascript
+let vec = new Vector(200, 100);
+let another = new Vector(10, 0);
+vec.distanceSq(another);
+console.log(vec);//--> 46100
+```
+### withinRange
+Returns boolean value depending wether given vector is within given distance. Arguments: `withinRange(vector, distance)`.
+```javascript
+let vec = new Vector(0, 0);
+let another = new Vector(10, 0);
+vec.withinRange(another, 9);//false
+```
+### segmentDistance
+Returns closest distance between a point and a line segment produced by self and another vector. Arguments: `segmentDistance(anotherEndOfSegment, point)`.
+```javascript
+let vec = new Vector(-50, 40);
+let another = new Vector(10, 10);
+let point = new Vector(5, 30);
+vec.segmentDistance(another, point);//15.652475842498529
+```
+### segmentDistanceSq
+Returns closest distance between a point and a line segment produced by self and another vector, in power of two. Arguments: `segmentDistance(anotherEndOfSegment, point)`.
+```javascript
+let vec = new Vector(-50, 40);
+let another = new Vector(10, 10);
+let point = new Vector(5, 30);
+vec.segmentDistanceSq(another, point);//245
+```
+### isShorter
+Returns boolean: `true` if length is less than given length, else return `false`. Arguments: `isShorter(number)`.
+```javascript
+let vec = new Vector(-50, 40);
+vec.isShorter(200);//true
+```
+### isLonger
+Returns boolean: `true` if length is more than given length, else return `false`. Arguments: `isLonger(number)`.
+```javascript
+let vec = new Vector(-50, 40);
+vec.isShorter(200);//false
+```
+### isEqual
+Returns `true` if another vector has same x & y values as self, else return `false`. Arguments: `isEqual(vector)`.
+```javascript
+let vec = new Vector(-50, 40);
+let another = new Vector(-50, 40);
+vec.isEqual(another);//true
+```
+### isAligned
+Returns `true` if another vector has the same angle as self. Optional second argument, tolerance, can be provided to extend allowed difference between the vectors' angles. Arguments: `isAligned(vector, number)`.
+```javascript
+let vec = new Vector(-500, 400);
+let another = new Vector(-50, 40);
+vec.isAligned(another);//true, no tolerance provided
+```
+### dot
+Return the dot product of self and another vector. Arguments: `dot(vector)`.
+```javascript
+let vec = new Vector(10, 10);
+let another = new Vector(2, 60);
+vec.dot(another);//620
+```
+### cross
+Return the cross product of self and another vector. Arguments: `cross(vector)`.
+```javascript
+let vec = new Vector(10, 10);
+let another = new Vector(2, 60);
+vec.cross(another);//580
+```
+### crossSign
+Return the sign (1 or -1) of the cross product of self and another vector. Arguments: `cross(vector)`.
+```javascript
+let vec = new Vector(10, 10);
+let another = new Vector(-2, -60);
+vec.crossSign(another);//-1
+```
+### normalize
+Sets the length of the vector to 1. Normalization doesn't have any effect on vectors with zero length.
+```javascript
+let vec = new Vector(10, 10);
+vec.normalize();
+console.log(vec);//{x: 0.7071067811865475, y: 0.7071067811865475}
+```
+### toLength
+Sets the length of the vector. Returns self so can be chained.
+```javascript
+let vec = new Vector(10, 10);
+vec.toLength(1);
+console.log(vec);//{x: 0.7071067811865475, y: 0.7071067811865475}
+```
+### stretch
+Increases the length of the vector. Arguments: `stretch(number)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(10, 10);
+vec.stretch(5);
+console.log(vec);//{x: 15, y: 15}
+```
+### limit
+Limits the length of the vector. Arguments: `limit(number)`. Returns self so can be chained.
+```javascript
+let vec = new Vector(10, 0);
+vec.limit(5);
+console.log(vec);//{x: 5, y: 0}
+```
