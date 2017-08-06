@@ -264,7 +264,7 @@ class Vector {
     if(a >= Math.PI) return this;
     if(v) {
       const oldAngle = this.angleBetween(v);
-      return oldAngle > a? this.lerpAlignWith(oldAngle - a, v) : this;
+      return oldAngle > a? this.lerpAlign(oldAngle - a, v) : this;
     } else {
       const oldAngle = this.angle;
       if(oldAngle > 0){
