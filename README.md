@@ -12,14 +12,14 @@ let velocity = new Vector();
 console.log(position);//--> {x: 100, y: 50}
 console.log(vecocity);//--> {x: 0, y: 0}
 ```
-# Properties
-## x
+## Properties
+### x
 x-axis value.
 ```javascript
 let vec = new Vector(100, 50);
 console.log(vec.x);//--> 100
 ```
-## y
+### y
 y-axis value.
 ```javascript
 let vec = new Vector(100, 50);
