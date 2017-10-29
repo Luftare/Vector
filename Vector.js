@@ -94,6 +94,16 @@ class Vector {
     return this;
   }
 
+  addX(x) {
+    this.x += x;
+    return this;
+  }
+
+  addY(y) {
+    this.y += y;
+    return this;
+  }
+
   clone() {
     return new Vector(this.x, this.y);
   }
