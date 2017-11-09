@@ -82,6 +82,16 @@ class Vector {
     return this;
   }
 
+	setX(v) {
+		this.x = v;
+		return this;	
+	}
+	
+	setY(v) {
+		this.y = v;
+		return this;	
+	}
+
   setFromTo(from, to) {
     return this.set(to).substract(from);
   }
