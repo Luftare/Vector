@@ -1,4 +1,4 @@
-class Vector {
+export default class Vector {
   constructor(...args) {
     if(args.length === 0) {
       this.x = 0;
@@ -84,12 +84,12 @@ class Vector {
 
 	setX(v) {
 		this.x = v;
-		return this;	
+		return this;
 	}
-	
+
 	setY(v) {
 		this.y = v;
-		return this;	
+		return this;
 	}
 
   setFromTo(from, to) {
