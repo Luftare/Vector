@@ -121,20 +121,20 @@ Generates random vector with a length of 1. Optional argument can be passed to s
 let vec = new Vector();
 vec.random();//possibly: {x: -0.23372631348780365, y: 0.9723024274285244}
 ```
-### substract(vector1 [, vectorN])
-Substract one or more vectors. Returns self so can be chained.
+### subtract(vector1 [, vectorN])
+Subtract one or more vectors. Returns self so can be chained.
 ```javascript
 let vec = new Vector(50, 50);
 let another = new Vector(10, 5);
-vec.substract(another);//{x: 40, y: 45}
+vec.subtract(another);//{x: 40, y: 45}
 ```
-### substraction(vector1, vector2)
-Sets vector value to the substraction of two vectors. Doesn't mutate the vectors passed as arguments. Returns self so can be chained.
+### subtraction(vector1, vector2)
+Sets vector value to the subtraction of two vectors. Doesn't mutate the vectors passed as arguments. Returns self so can be chained.
 ```javascript
 let vec = new Vector();
 let other = new Vector(100, 100);
 let another = new Vector(5, 5);
-vec.substraction(another, other);//{x: -95, y: 95}
+vec.subtraction(another, other);//{x: -95, y: 95}
 ```
 ### scaledAdd(scale, vector1 [, vectorN])
 Add one or more vectors while multiplying the vectors by given scalar. Doesn't mutate vectors passed as arguments. Returns self so can be chained.
