@@ -296,12 +296,14 @@ export default class Vector {
   }
 
   angleBetween(v) {
-    return Math.acos(this.dot(v) / (this.length * v.length));
+    const angle = Math.acos(this.dot(v) / (this.length * v.length));
+    if (isNaN(angle)) return 0;
+    return angle;
   }
 
   angleBetweenSigned(v) {
     var sign = this.crossSign(v);
-    return sign * Math.acos(this.dot(v) / (this.length * v.length));
+    return sign * this.angleBetween(v);
   }
 
   mirror() {
