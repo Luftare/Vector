@@ -1,9 +1,9 @@
 export default class Vector {
   constructor(...args) {
-    if(args.length === 0) {
+    if (args.length === 0) {
       this.x = 0;
       this.y = 0;
-    } else if(args.length === 1){
+    } else if (args.length === 1) {
       this.x = args[0].x;
       this.y = args[0].y;
     } else {
@@ -12,9 +12,8 @@ export default class Vector {
     }
   }
 
-  //getters
   get angle() {
-    return (this.x < 0? Math.PI : 0) + Math.atan(this.y / this.x);
+    return (this.x < 0 ? Math.PI : 0) + Math.atan(this.y / this.x);
   }
 
   get length() {
@@ -29,7 +28,6 @@ export default class Vector {
     return (new Vector()).set(this).toNormal();
   }
 
-  //setters
   set angle(a) {
     const l = this.length;
     const nX = Math.cos(a);
@@ -38,11 +36,10 @@ export default class Vector {
   }
 
   set length(l) {
-    if(this.length === 0) return this.set(l, 0);
+    if (this.length === 0) return this.set(l, 0);
     this.normalize().scale(l);
   }
 
-  //methods
   fromArray(arr) {
     this.x = arr[0];
     this.y = arr[1];
@@ -64,7 +61,7 @@ export default class Vector {
   }
 
   toObject() {
-    return {x: this.x, y: this.y};
+    return { x: this.x, y: this.y };
   }
 
   toString() {
@@ -72,7 +69,7 @@ export default class Vector {
   }
 
   set(...args) {
-    if(args.length === 1) {
+    if (args.length === 1) {
       this.x = args[0].x;
       this.y = args[0].y;
     } else {
@@ -82,15 +79,15 @@ export default class Vector {
     return this;
   }
 
-	setX(v) {
-		this.x = v;
-		return this;
-	}
+  setX(v) {
+    this.x = v;
+    return this;
+  }
 
-	setY(v) {
-		this.y = v;
-		return this;
-	}
+  setY(v) {
+    this.y = v;
+    return this;
+  }
 
   setFromTo(from, to) {
     return this.set(to).subtract(from);
@@ -130,8 +127,16 @@ export default class Vector {
     return this;
   }
 
+  substract(...args) {
+    this.subtract(...args);
+  }
+
   subtraction(a, b) {
     return this.set(a.x - b.x, a.y - b.y);
+  }
+
+  substraction(a, b) {
+    return this.subtraction(a, b);
   }
 
   scaledAdd(a, ...args) {
@@ -166,11 +171,11 @@ export default class Vector {
     return (this.x - v.x) ** 2 + (this.y - v.y) ** 2;
   }
 
-  withinRange(v,r) {
+  withinRange(v, r) {
     return this.distanceSq(v) < r ** 2;
   }
 
-  outsideRange(v,r) {
+  outsideRange(v, r) {
     return this.distanceSq(v) > r ** 2;
   }
 
@@ -241,15 +246,15 @@ export default class Vector {
   }
 
   crossSign(v) {
-    if(this.isEqual(v)) return 0;
+    if (this.isEqual(v)) return 0;
     const c = this.cross(v);
-    return c >= 0? 1 : -1;
+    return c >= 0 ? 1 : -1;
   }
 
   normalize() {
     const l = this.length;
-    if(l === 0) return this.set(0,0);
-    return this.scale(1/l);
+    if (l === 0) return this.set(0, 0);
+    return this.scale(1 / l);
   }
 
   toLength(l) {
@@ -258,20 +263,20 @@ export default class Vector {
   }
 
   stretch(l) {
-	let len = this.length;
-	if(len === 0 && l > 0) return this.set(l, 0);
+    let len = this.length;
+    if (len === 0 && l > 0) return this.set(l, 0);
     this.length = Math.max(0, this.length + l);
     return this;
   }
 
   limit(l) {
     const len = this.length;
-    return len > l? this.toLength(l) : this;
+    return len > l ? this.toLength(l) : this;
   }
 
   unlimit(l) {
     const len = this.length;
-    return len < l? this.toLength(l) : this;
+    return len < l ? this.toLength(l) : this;
   }
 
   clampLength(...args) {
@@ -281,16 +286,16 @@ export default class Vector {
   }
 
   clampAngle(a, v) {
-    if(a >= Math.PI) return this;
-    if(v) {
+    if (a >= Math.PI) return this;
+    if (v) {
       const oldAngle = this.angleBetween(v);
-      return oldAngle > a? this.lerpAlign(oldAngle - a, v) : this;
+      return oldAngle > a ? this.lerpAlign(oldAngle - a, v) : this;
     } else {
       const oldAngle = this.angle;
-      if(oldAngle > 0){
-        return oldAngle < a? this : this.toAngle(a);
+      if (oldAngle > 0) {
+        return oldAngle < a ? this : this.toAngle(a);
       } else {
-        return oldAngle > -a? this : this.toAngle(-a);
+        return oldAngle > -a ? this : this.toAngle(-a);
       }
     }
   }
@@ -311,14 +316,14 @@ export default class Vector {
   }
 
   zero() {
-    return this.set(0,0);
+    return this.set(0, 0);
   }
 
   toNormal(dir = false) {
-    if(dir){
-      return this.set(this.y,this.x).mirror();
+    if (dir) {
+      return this.set(this.y, this.x).mirror();
     } else {
-      return this.set(this.y,this.x);
+      return this.set(this.y, this.x);
     }
   }
 
@@ -335,22 +340,22 @@ export default class Vector {
     const l = this.length;
     const s = Math.sin(a);
     const c = Math.cos(a);
-    const nX = this.x*c - this.y*s;
-    const nY = this.x*s + this.y*c;
-    return this.set(nX,nY).toLength(l);
+    const nX = this.x * c - this.y * s;
+    const nY = this.x * s + this.y * c;
+    return this.set(nX, nY).toLength(l);
   }
 
   lerpAlign(da, v) {
     const sign = this.crossSign(v);
     this.rotate(da * sign);
     const newSign = this.crossSign(v);
-    return sign !== newSign? this.alignWith(v) : this;
+    return sign !== newSign ? this.alignWith(v) : this;
   }
 
   lerpAlignFixed(da, CW, v) {
     const sign = this.crossSign(v);
-    this.rotate(da * (CW? 1 : -1));
+    this.rotate(da * (CW ? 1 : -1));
     const newSign = this.crossSign(v);
-    return sign !== newSign? this.alignWith(v) : this;
+    return sign !== newSign ? this.alignWith(v) : this;
   }
 }
