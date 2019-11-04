@@ -93,7 +93,7 @@ export default class Vector {
 	}
 
   setFromTo(from, to) {
-    return this.set(to).substract(from);
+    return this.set(to).subtract(from);
   }
 
   add(...args) {
@@ -122,7 +122,7 @@ export default class Vector {
     return this.set(l, 0).rotate(Math.random() * Math.PI * 2);
   }
 
-  substract(...args) {
+  subtract(...args) {
     args.forEach(v => {
       this.x -= v.x;
       this.y -= v.y;
@@ -130,7 +130,7 @@ export default class Vector {
     return this;
   }
 
-  substraction(a, b) {
+  subtraction(a, b) {
     return this.set(a.x - b.x, a.y - b.y);
   }
 
