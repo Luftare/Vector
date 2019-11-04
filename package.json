@@ -4,7 +4,8 @@
   "description": "Vector is an extended 2D vector library with lots of utilitary methods. ## How to install ```html <script src=\"Vector.js\"></script> ``` ## Properties ### x & y x-axis and y-axis values. These are the only properties of the `Vector` object. ```javascript let vec = new Vector(100, 50); console.log(vec.x, vec.y);//--> 100, 50 ``` ## Getters ### length Length of the vector. ```javascript let vec = new Vector(100, 50); vec.length//111.80339887498948 ``` ### angle Angle of the vector in radians. ```javascript let vec = new Vector(100, 50); vec.angle//0.4636476090008061 ``` ## Setters ### length Set the length of the vector while maintaining the original angle of the vector. ```javascript let vec = new Vector(100, 50); vec.length = 25;//{x: 22.360, y: 11.180} ``` ### angle Set the angle of the vector in radians ie. rotate the vector to point at given angle. ```javascript let vec = new Vector(100, 50); vec.angle = Math.PI;//{x: -111.80339887498948, y: 0} ``` ## Methods ### add(vector1 [, vectorN]) Sum of one or more vectors. Returns self so can be chained. ```javascript let vec = new Vector(50, 50); let other = new Vector(100, 100); let another = new Vector(5, 0); vec.add(other, another);//{x: 155, y: 150} ``` ### clone() Returns a new vector with x & y values copied from self. ```javascript let vec = new Vector(50, 50); let copy = vec.clone(); console.log(copy.x, copy.y);//--> 50, 50 ``` ### fromArray(array) Set x & y properties from an array. Returns self so can be chained. ```javascript let vec = new Vector(); let arr = [10, 20]; vec.fromArray(arr);//{x: 10, y: 20} ``` ### fromObject(object) Set x & y properties from object. Returns self so can be chained. ```javascript let obj = {x: 10, y: 20}; let vec = new Vector(); vec.fromObject(obj);//{x: 10, y: 20} ``` ### fromAngleRadius(angle, radius) Set x & y properties from polar coordinates. Returns self so can be chained. ```javascript let vec = new Vector(); vec.fromAngleRadius(Math.PI, 50);//{x: -50, y: 0} ``` ### toArray() Returns a new array with x & y values at index 0 (x) and 1 (y). ```javascript let vec = new Vector(10, 20); let arr = vec.toArray();//[10, 20] ``` ### toObject() Returns a new object with x & y properties copied from the vector. ```javascript let vec = new Vector(10, 20); let obj = vec.toObject();//{x: 10, y: 20} ``` ### toString() Returns a string presentation of the vector properties. ```javascript let vec = new Vector(10, 20); let str = vec.toString();//{x: 10, y: 20}' ``` ### set(x, y) or set(vector) Set the x & y values. Can be used with one or two arguments: * 1 argument: copy object's x & y properties to the vector * 2 arguments: set provided x & y arguments to the vector Returns self so can be chained. ```javascript //one argument let other = {x: 200, y: 300};//this can be a vector, too let vec = new Vector(); vec.set(other);//{x: 200, y: 300};",
   "main": "Vector.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Luftare/Vector/issues"
   },
-  "homepage": "https://github.com/Luftare/Vector#readme"
+  "homepage": "https://github.com/Luftare/Vector#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }
